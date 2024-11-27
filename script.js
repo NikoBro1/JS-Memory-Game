@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let timer = 0;
   let timerInterval;
 
-  // Image paths for cards
   const images = [
     'images/BEDROCK.png',
     'images/BOOKSHELF.png',
@@ -32,25 +31,21 @@ document.addEventListener('DOMContentLoaded', () => {
     'images/TNT.png',
     'images/LVSBLCK.png',
     'images/CRLBLCK.png',
-    // Add more images if needed
   ];
 
-  // Start Game
   startForm.addEventListener('submit', (e) => {
     e.preventDefault();
     playerName = playerNameInput.value;
     cardPairs = parseInt(cardPairsInput.value, 10);
-    if (cardPairs > images.length) cardPairs = images.length; // Limit pairs to available images
+    if (cardPairs > images.length) cardPairs = images.length;
     startGame();
   });
 
-  // Restart Game
   restartButton.addEventListener('click', () => {
     clearInterval(timerInterval);
     resetGame();
   });
 
-  // Start Game Logic
   function startGame() {
     startForm.classList.add('d-none');
     gameContainer.classList.remove('d-none');
@@ -60,33 +55,30 @@ document.addEventListener('DOMContentLoaded', () => {
     startTimer();
   }
 
-  // Generate Cards
   function generateCards() {
     cards = [];
     flippedCards = [];
     matchedCards = 0;
 
-    // Create pairs of cards with images
     const selectedImages = images.slice(0, cardPairs);
     selectedImages.forEach((img) => {
       cards.push({ img, id: `${img}-1` });
-      cards.push({ img, id: `${img}-2` }); // Ensure unique IDs
+      cards.push({ img, id: `${img}-2` });
     });
 
-    shuffle(cards); // Shuffle cards
+    shuffle(cards);
 
-    board.innerHTML = ''; // Clear previous board
+    board.innerHTML = '';
     cards.forEach((card) => {
       const cardElement = document.createElement('div');
       cardElement.className = 'card hidden';
       cardElement.dataset.id = card.id;
 
-      // Create an image element
       const imgElement = document.createElement('img');
       imgElement.src = card.img;
       imgElement.alt = 'Card Image';
       imgElement.className = 'card-image';
-      imgElement.style.display = 'none'; // Hidden by default
+      imgElement.style.display = 'none';
 
       cardElement.appendChild(imgElement);
       cardElement.addEventListener('click', () => handleCardClick(cardElement));
@@ -94,13 +86,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Handle Card Click
   function handleCardClick(card) {
     if (!card.classList.contains('hidden') || flippedCards.length >= 2) return;
 
     card.classList.remove('hidden');
     const img = card.querySelector('.card-image');
-    img.style.display = 'block'; // Show the image
+    img.style.display = 'block';
     flippedCards.push(card);
 
     if (flippedCards.length === 2) {
@@ -108,7 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Check for Match
   function checkMatch() {
     const [first, second] = flippedCards;
 
@@ -132,14 +122,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // End Game
   function endGame() {
     clearInterval(timerInterval);
     alert(`כל הכבוד, ${playerName}! סיימת את המשחק ב-${timer} שניות.`);
     restartButton.classList.remove('d-none');
   }
 
-  // Reset Game
   function resetGame() {
     startForm.classList.remove('d-none');
     gameContainer.classList.add('d-none');
@@ -148,7 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
     timerDisplay.textContent = 'זמן: 0 שניות';
   }
 
-  // Timer
   function startTimer() {
     timer = 0;
     timerInterval = setInterval(() => {
@@ -157,7 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1000);
   }
 
-  // Shuffle Array
   function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
