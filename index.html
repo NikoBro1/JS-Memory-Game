@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>משחק זיכרון</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container text-center mt-4">
+    <h1>משחק זיכרון</h1>
+    <form id="start-form" class="mb-4">
+      <input type="text" id="player-name" class="form-control mb-2" placeholder="הכנס את שמך" required>
+      <input type="number" id="card-pairs" class="form-control mb-2" placeholder="מספר זוגות קלפים (מקסימום 30)" min="1" max="30" required>
+      <button type="submit" class="btn btn-primary">התחל משחק</button>
+    </form>
+    <div id="game-container" class="d-none">
+      <h2 id="player-header"></h2>
+      <div id="timer" class="mb-3">זמן: 0 שניות</div>
+      <div id="board" class="d-flex flex-wrap justify-content-center"></div>
+      <button id="restart-btn" class="btn btn-secondary mt-3 d-none">שחק מחדש</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
